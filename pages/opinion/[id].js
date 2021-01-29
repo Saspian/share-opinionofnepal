@@ -8,7 +8,9 @@ import ReactHtmlParser from "react-html-parser";
 export default function SingleArticle() {
   const router = useRouter();
   const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
   const [sector, setSector] = useState("");
+  const [image, setImage] = useState("");
   const { id } = router.query;
   const { data, error, loading } = useQuery(SINGLE_OPINION, {
     variables: {
@@ -18,10 +20,10 @@ export default function SingleArticle() {
 
   useEffect(() => {
     setContent(ReactHtmlParser(data?.opinion?.text));
+    setTitle(`${data?.opinion?.title} - Opinion of Nepal`);
     setSector(data?.opinion?.sector);
+    setImage("https://opinionofnepal.com/opinion-logo.png");
   }, [data]);
-
-  let title = data?.opinion?.title;
 
   return (
     <div>
@@ -37,10 +39,7 @@ export default function SingleArticle() {
           property="og:description"
           content={content[0]?.props?.children[0]}
         />
-        <meta
-          property="og:image"
-          content="https://opinionofnepal.com/opinion-logo.png"
-        />
+        <meta property="og:image" content={image} />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta
@@ -52,21 +51,14 @@ export default function SingleArticle() {
           property="twitter:description"
           content={content[0]?.props?.children[0]}
         />
-        <meta
-          property="twitter:image"
-          content="https://opinionofnepal.com/opinion-logo.png"
-        />
+        <meta property="twitter:image" content={image} />
       </Head>
       <section>
-        {loading ? (
-          <h1>Loading...</h1>
-        ) : (
-          <a
-            href={`https://dev.opinionofnepal.com/articles/${sector?.toLowerCase()}/${id}`}
-          >
-            <h1>{data?.opinion?.title}</h1>
-          </a>
-        )}
+        <a
+          href={`https://dev.opinionofnepal.com/articles/${sector?.toLowerCase()}/${id}`}
+        >
+          <h1>{data?.opinion?.title}</h1>
+        </a>
       </section>
     </div>
   );
