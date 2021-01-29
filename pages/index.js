@@ -1,10 +1,11 @@
 import Head from "next/head";
-import ArticleList, { opinionID } from "../components/articleList";
+import ArticleList from "../components/articleList";
 import { OPINION_LIST, SINGLE_OPINION } from "../components/query";
 import styles from "../styles/Home.module.css";
 import { initializeApollo } from "../lib/apolloClient";
+// import apolloClient from "../lib/apolloClient";
 
-export default function Home() {
+export default function Home({ initialApolloState }) {
   let title = "Opinion of Nepal";
   let image = "https://opinionofnepal.com/opinion-logo.png";
   let description =
@@ -20,7 +21,7 @@ export default function Home() {
         <meta name="description" content={description} />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://dev.opinionofnepal.com/" />
+        <meta property="og:url" content="http://share.opinionofnepal.com" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
@@ -28,7 +29,7 @@ export default function Home() {
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
-          content="https://dev.opinionofnepal.com/"
+          content="http://share.opinionofnepal.com"
         />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
@@ -38,7 +39,7 @@ export default function Home() {
       <main>
         <h1 className={styles.title}>Opinion list</h1>
       </main>
-      <ArticleList />
+      <ArticleList initialState={initialApolloState} />
     </div>
   );
 }
@@ -46,18 +47,18 @@ export default function Home() {
 export async function getServerSideProps() {
   const apolloClient = initializeApollo();
 
-  await apolloClient.query({
+  const { data } = await apolloClient.query({
     query: OPINION_LIST,
   });
 
-  await apolloClient.query({
-    query: SINGLE_OPINION,
-    variables: opinionID,
-  });
+  // await apolloClient.query({
+  //   query: SINGLE_OPINION,
+  //   variables: opinionID,
+  // });
 
   return {
     props: {
-      initialApolloState: apolloClient.cache.extract(),
+      initialApolloState: data.opinions,
     },
   };
 }
