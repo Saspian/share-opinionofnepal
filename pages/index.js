@@ -3,6 +3,8 @@ import ArticleList from "../components/articleList";
 import { OPINION_LIST, SINGLE_OPINION } from "../components/query";
 import styles from "../styles/Home.module.css";
 import { initializeApollo } from "../lib/apolloClient";
+import { useEffect } from "react";
+import { environment } from "../components/utils";
 // import apolloClient from "../lib/apolloClient";
 
 export default function Home({ initialApolloState }) {
@@ -12,6 +14,10 @@ export default function Home({ initialApolloState }) {
     "Opinion of Nepal (OON) is an opinion sharing platform where people can come and share their ideas and opinions about any given topic, be it an experience, a social issue, a life event, short stories or essays." +
     "OON looks forward to becoming a community based platform, where opinions are nurtured." +
     "Where people can come forward and speak their mind in the hopes of bringing like minded people together.";
+
+  useEffect(() => {
+    window.location.href = environment();
+  }, []);
   return (
     <div>
       <Head>
@@ -37,9 +43,9 @@ export default function Home({ initialApolloState }) {
       </Head>
 
       <main>
-        <h1 className={styles.title}>Opinion list</h1>
+        <span style={{ color: "#70C03F" }}>redirecting...</span>
       </main>
-      <ArticleList initialState={initialApolloState} />
+      {/* <ArticleList initialState={initialApolloState} /> */}
     </div>
   );
 }

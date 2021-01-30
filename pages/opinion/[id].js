@@ -1,11 +1,11 @@
-import { useQuery } from "@apollo/client";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { SINGLE_OPINION } from "../../components/query";
 import Head from "next/head";
-import { useState, useEffect } from "react";
 import ReactHtmlParser from "react-html-parser";
 // import apolloClient from "../../lib/apolloClient";
 import { initializeApollo } from "../../lib/apolloClient";
+import { environment } from "../../components/utils";
 
 export default function SingleArticle({ opinion }) {
   const router = useRouter();
@@ -15,9 +15,13 @@ export default function SingleArticle({ opinion }) {
   let title = `${opinion.title} - Opinion of Nepal`;
   let sector = opinion.sector;
   let image = opinion.thumbnail
-    ? "https://dev.opinionofnepal.com/" + opinion.thumbnail
+    ? environment() + opinion.thumbnail
     : "https://opinionofnepal.com/opinion-logo.png";
   let currentUrl = "https://share.opinionofnepal.com" + router.asPath;
+
+  useEffect(() => {
+    window.location.href = `${environment()}articles/${sector?.toLowerCase()}/${id}`;
+  }, []);
 
   return (
     <div>
@@ -49,11 +53,7 @@ export default function SingleArticle({ opinion }) {
         <meta property="twitter:image" content={image} />
       </Head>
       <section>
-        <a
-          href={`https://dev.opinionofnepal.com/articles/${sector?.toLowerCase()}/${id}`}
-        >
-          <h1>{title}</h1>
-        </a>
+        <span style={{ color: "#70C03F" }}>redirecting...</span>
       </section>
     </div>
   );
