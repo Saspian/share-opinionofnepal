@@ -14,7 +14,9 @@ export default function SingleArticle({ opinion }) {
   let content = ReactHtmlParser(opinion.text);
   let title = `${opinion.title} - Opinion of Nepal`;
   let sector = opinion.sector;
-  let image = "https://opinionofnepal.com/opinion-logo.png";
+  let image = opinion.thumbnail
+    ? "https://dev.opinionofnepal.com/" + opinion.thumbnail
+    : "https://opinionofnepal.com/opinion-logo.png";
   let currentUrl = "https://share.opinionofnepal.com" + router.asPath;
 
   return (
@@ -26,7 +28,7 @@ export default function SingleArticle({ opinion }) {
         <meta property="url" content={currentUrl} />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://share.opinionofnepal.com" />
+        <meta property="og:url" content={currentUrl} />
         <meta property="og:title" content={title} />
         <meta
           property="og:description"
