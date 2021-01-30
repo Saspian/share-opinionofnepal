@@ -15,7 +15,7 @@ export default function SingleArticle({ opinion }) {
   let title = `${opinion.title} - Opinion of Nepal`;
   let sector = opinion.sector;
   let image = "https://opinionofnepal.com/opinion-logo.png";
-  let currentUrl = "http://share.opinionofnepal.com" + router.asPath;
+  let currentUrl = "https://share.opinionofnepal.com" + router.asPath;
 
   return (
     <div>
@@ -26,7 +26,7 @@ export default function SingleArticle({ opinion }) {
         <meta property="url" content={currentUrl} />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://share.opinionofnepal.com" />
+        <meta property="og:url" content="https://share.opinionofnepal.com" />
         <meta property="og:title" content={title} />
         <meta
           property="og:description"
@@ -37,7 +37,7 @@ export default function SingleArticle({ opinion }) {
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
-          content="http://share.opinionofnepal.com"
+          content="https://share.opinionofnepal.com"
         />
         <meta property="twitter:title" content={title} />
         <meta

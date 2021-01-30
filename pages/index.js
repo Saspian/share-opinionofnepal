@@ -21,7 +21,7 @@ export default function Home({ initialApolloState }) {
         <meta name="description" content={description} />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://share.opinionofnepal.com" />
+        <meta property="og:url" content="https://share.opinionofnepal.com" />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
@@ -29,7 +29,7 @@ export default function Home({ initialApolloState }) {
         <meta property="twitter:card" content="summary_large_image" />
         <meta
           property="twitter:url"
-          content="http://share.opinionofnepal.com"
+          content="https://share.opinionofnepal.com"
         />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
