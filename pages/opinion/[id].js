@@ -41,10 +41,7 @@ export default function SingleArticle({ opinion }) {
         <meta property="og:image" content={image} />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta
-          property="twitter:url"
-          content="https://share.opinionofnepal.com"
-        />
+        <meta property="twitter:url" content={currentUrl} />
         <meta property="twitter:title" content={title} />
         <meta
           property="twitter:description"
